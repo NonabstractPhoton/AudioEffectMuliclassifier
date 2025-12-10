@@ -3,7 +3,7 @@ clip_samples = sample_rate * 2     # Audio clips are 2-second
 
 # Note: compressor, envelope, fuzz must be added; they are not in the IDMT-AUDIO-EFFECTS dataset
 labels = ['reverb', 'chorus', 'flanger', 'bitcrusher','phaser','tremolo','distortion', 'overdrive','no_effect']
-max_multilabels = 3
+max_multilabels = 2
 classes_num = len(labels)
 '''
 lb_to_ix = {label : i for i, label in enumerate(labels)}

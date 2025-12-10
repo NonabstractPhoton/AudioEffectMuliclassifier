@@ -326,3 +326,14 @@ class FXClassifier(L.LightningModule):
         avg_precision = self.accuracy(output, targets)
         self.print(f'Validation Average Precision: {avg_precision}')
         self.log("val_avg_precision_across_classes", torch.mean(avg_precision), on_epoch=True, sync_dist=True,batch_size=output.size(0))
+
+    def test_step(self, batch_dict, batch_idx):
+        inputs = batch_dict["waveform"]
+        targets = torch.as_tensor(batch_dict["target"], dtype=torch.float32).cuda()
+        output = self(inputs)['output']
+        loss = self.loss_func(output, targets)
+        self.log('test_loss', loss, on_epoch=True, sync_dist=True,batch_size=output.size(0))
+        self.print(f'Test Loss: {loss.item()}')
+        avg_precision = self.accuracy(output, targets)
+        self.print(f'Test Average Precision: {avg_precision}')
+        self.log("test_avg_precision_across_classes", torch.mean(avg_precision), on_epoch=True, sync_dist=True,batch_size=output.size(0))

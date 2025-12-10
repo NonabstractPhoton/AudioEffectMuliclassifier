@@ -6,3 +6,6 @@ lightning_logs/
 statistics/
 testset/
 updated_dataset/
+test_egset12_processed/
+test_set/
+test_set_single_effect/
